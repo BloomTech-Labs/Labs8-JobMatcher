@@ -39,6 +39,13 @@ ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.spl
 
 
 # Application definition
+WEBPACK_LOADER = {
+    'DEFAULT': {
+            'BUNDLE_DIR_NAME': 'bundles/',
+            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
+        }
+}
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -47,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'webpack_loader',
     'JobMatcherApp'
 ]
 
@@ -66,7 +74,9 @@ ROOT_URLCONF = 'JobMatcher.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 'DIRS': [],
+        # To serve the index page of the application we need to create a view and template in django.
+        'DIRS': [os.path.join(BASE_DIR, 'JobMatcher/templates'), ], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -141,3 +151,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
