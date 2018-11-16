@@ -17,9 +17,8 @@ router = routers.DefaultRouter() # SimpleRouter
 router.register('users', UserViewSet)
 
 urlpatterns = [
-    path('api-auth/', include('rest_framework.urls')),
-    path('signup', SignUpView.as_view()),
-    path('signin', obtain_jwt_token)
+    path('provider/linkedin', SignUpView.as_view()),
+   
 ]
 
 urlpatterns += router.urls

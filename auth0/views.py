@@ -22,22 +22,6 @@ jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    Http_method_names = ['get', 'post', 'put', 'delete', 'patch']
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = EmployerSerializer
-    Http_method_names = ['get', 'post', 'put', 'delete', 'patch']
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = SeekerSerializer
-    Http_method_names = ['get', 'post', 'put', 'delete', 'patch']
-
-
 # @TODO  
 class SignUpView(APIView):
 
