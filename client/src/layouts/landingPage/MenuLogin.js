@@ -6,7 +6,7 @@ import connect from "react-redux/es/connect/connect";
 import { login } from "../../features/auth/store/action";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
-import LinkedIn from "../../features/auth/container/LinkedIn";
+import LinkedIn from "../../features/auth/linkedIn/linkedIn";
 const zoomIn = keyframes`
   0%{
     opacity: 0;
@@ -116,9 +116,13 @@ const Menu = styled.div`
   .form-group{
     display: flex;
     justify-content: space-between;
-     align-items: center;
+    align-items: center;
+    flex-direction: row;
   }
-    
+    @media (max-width: 450px) {
+      margin: 10px auto;
+      width: 91%;
+    }
 `;
 class MenuLogin extends React.Component {
   constructor(props) {
@@ -184,7 +188,7 @@ class MenuLogin extends React.Component {
           />
         </div>
         <div className="menu_social_login">
-          <LinkedIn loginButtonText={"Login"} />
+          <LinkedIn actionType={"Login"} login={true} />
         </div>
         <div className="divisor">
           <span className="divisor_1" />
@@ -217,6 +221,7 @@ class MenuLogin extends React.Component {
           </Button>
         </Form>
         <p>
+          {" "}
           Looking to <Link to={"/auth/register"}>create an account?</Link>{" "}
         </p>
       </Menu>

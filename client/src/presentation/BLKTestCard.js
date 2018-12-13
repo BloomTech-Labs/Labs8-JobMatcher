@@ -24,61 +24,30 @@ const ShowFullCard = styled.div`
   display: ${props => (props.is_open ? "block" : "none")};
 `;
 const StyledH5 = styled.h5`
-  color: ${props => (props.is_seeker ? "red" : "green")};
-  color: white;
-  text-transform: capitalize;
-  cursor: pointer;
-  font-size: 20px;
-  font-weight: 700;
+  padding: ${props => (props.is_seeker ? "0px 9%" : "0 0")};
+  text-align: ${props => (props.is_seeker ? "left" : "center")};
 `;
 
-const beat = keyframes`
-	to { transform: scale(1.1); }
-`;
 const StyledButton = styled(Button)`
   // background-color: #207ccae8;
   // color: #444444;
-    width: 48px !important;
-    height: 48px !important;
-    padding: 10px !important;
-    border-radius: 50%;
-    // animation: ${beat} .5s infinite;
-    transition: all;
-    i{
-        font-size: 26px !important;
-    }
-    &:nth-child(2){
-     animation: ${beat} .5s infinite;
-    }
-`;
-const StyledCardImg = styled(CardImg)`
-  width: 100%;
+  width: 48px !important;
+  height: 48px !important;
+  padding: 5px !important;
   border-radius: 50%;
+  box-sizing: border-box;
+  transition: all;
+  i {
+    font-size: 26px !important;
+  }
 `;
-const StyledDropdownToggle = styled(DropdownToggle)`
-  margin: auto;
-  /* padding: 6px 135px; */
-  /* width: 100%; */
-  /* box-sizing: border-box; */
-  border: none;
-  // border: 1px solid;
-  // border-radius: 0;
-  background-color: #27293d !important;
-  color: white;
-  transition: all 0.4s;
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: transparent !important;
-    color: white !important;
-    border: 1px solid white !important;
-    border: 1px solid white !important;
-  }
-  &:not(:disabled):not(.disabled):active {
-    background-color: transparent;
-    color: white;
-    border: 1px solid;
-  }
+
+const StyledCompanyName = styled.h1`
+  margin-bottom: 12px;
+`;
+
+const StyledSkilledDiv = styled.div`
+  margin-top: 20px;
 `;
 const backdrop = keyframes`
     from{
@@ -89,30 +58,25 @@ const backdrop = keyframes`
     }
 `;
 const StyledCard = styled(Card)`
-    width: ${props => (props.width ? props.width : "100%")}
-    background-color: #27293d;
-    color: white;
-    margin: 10px auto;
-    text-align: start;
-    border-radius: 0;
-    // border-left: 10px solid #3358f4;
-    padding: 15px 10px;
-    padding: 20px 20px;
-    border: 1px solid #81818142;
-    border-radius: 41px;
-    box-shadow: 1px 1px 10px #a8419b;
-    animation: ${backdrop} 3s infinite;
-    transition: animation 3s;
-    i{
-        cursor: pointer;
-        &:hover{
-            color: #207ccae8;
-        }
+  width: ${props => (props.width ? props.width : "100%")};
+  height: ${props => (props.width ? "400px" : "auto")};
+  background-color: #27293d;
+  color: white;
+  margin: 0px auto;
+  text-align: start;
+  border-radius: 0;
+  // border-left: 10px solid #3358f4;
+  padding: 20px 20px;
+  border: 1px solid #81818142;
+  border-radius: 10px;
+  overflow: hidden;
+  i {
+    cursor: pointer;
+    &:hover {
+      color: #207ccae8;
     }
-    @media (min-width: 900px) {
-      margin: 10px 5px;
-      margin: auto;
-    }
+  }
+  margin-bottom: 20px;
 `;
 const moveUp = keyframes`
     0%{
@@ -150,50 +114,50 @@ const moveDown = keyframes`
 `;
 
 const CardHeader = styled.div`
-  position: relative;
-  width: 100%;
-  height: 150px;
-  display: flex;
-  // border-radius: 20px;
-  border-bottom: 1px solid #4a4a4a;
-  border-top: 1px solid #4a4a4a;
-  border-radius: 20px;
-  padding: 10px;
-  background-color: #27293d;
-  top: "0px";
-  margin-bottom: 5px;
-
-  animation: ${props => (props.is_open ? moveUp : moveDown)};
-  animation-duration: 2s;
-  // animation-delay: 3s;
-  transition: animation 0.4s ease;
-  img {
-    width: 130px;
-    height: 90%;
-    border-radius: 50%;
-    padding: 10px;
-    margin: auto;
-    // border: 1px solid white;
-  }
-  div {
-    flex: 1;
-    margin: auto;
-    margin-left: 20px;
-  }
-  h6 {
-    overflow: scroll;
-    font-size: 12px;
-    font-weight: 500;
-    text-transform: unset;
-  }
+  // position: relative;
+  // width: 100%;
+  // height:  ${props => (props.height ? "80px" : "100px")};
+  // display: flex;
+  // border-bottom: 1px solid #4a4a4a;
+  // border-top: 1px solid #4a4a4a;
+  // // border-radius: 20px;
+  // padding: 10px;
+  // background-color: #27293d;
+  // margin-bottom: 5px;
+  //
+  // animation: ${props => (props.is_open ? moveUp : moveDown)};
+  // animation-duration: 2s;
+  // transition: animation 0.4s ease;
+  //
+  // img {
+  //   width: auto;
+  //   height: 90%;
+  //   border-radius: 50%;
+  //   padding: 2px;
+  //   margin: auto;
+  //   border: 1px solid #4a4a4a;
+  // }
+  // div {
+  //   flex: 1;
+  //   margin: auto;
+  //   margin-left: 20px;
+  // }
+  // h6 {
+  //   overflow: scroll;
+  //   font-size: 12px;
+  //   font-weight: 500;
+  //   text-transform: unset;
+  // }
 `;
 const StyledCardBody = styled.div`
   position: relative;
   width: 100%;
-  height: 200px;
+  height: ${props => (props.height ? props.height : "200px")};
   padding: 10px 30px;
   text-align: start;
-  // border-radius: 20px;
+  // border-top: 1px solid white;
+  margin-top: 10px;
+  padding-top: 10px;
   background-color: transparent;
   transform-style: preserve-3d;
   perspective: 2000px;
@@ -203,7 +167,7 @@ const StyledCardBody = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    height: 200px;
+    max-height: 200px;
     width: 100%;
     padding: 10px 30px;
     backface-visibility: hidden;
@@ -223,7 +187,7 @@ const StyledCardBody = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 200px;
+    max-height: 200px;
     padding: 10px 30px;
     backface-visibility: hidden;
     background-color: #27293d;
@@ -268,7 +232,7 @@ const CardFooter = styled.div`
 `;
 
 const StyledCardTitle = styled.p`
-  font-size: 25px;
+  font-size: 18px;
   text-transform: capitalize;
   text-decoration: none;
   font-weight: 600;
@@ -315,37 +279,82 @@ class ExplicitBaseCard extends React.Component {
     // console.log("ExplicitBaseCard", {props});
     let { props } = this;
     return (
-      <StyledCard width={props.width} onClick={props.toggle} id={"baseCard"}>
+      <StyledCard width={props.width} id={"baseCard"}>
         {/************************** CardHeader starts *******************************/}
-        <CardHeader className="styled-card-header" is_open={props.is_open}>
-          <CardImg
-            src={
-              props.photo ||
-              "https://images.unsplash.com/photo-1527605555-b01c458b8029?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
-            }
-            alt="Card image cap"
-          />
-          <div>
-            <StyledH5 is_seeker={props.is_seeker}>{props.name}</StyledH5>
-            <CardSubtitle>{props.summary}</CardSubtitle>
+
+        <CardHeader
+          className="styled-card-header card-user"
+          is_open={props.is_open}
+          height={props.height}
+          onClick={props.toggle}
+        >
+          {/*<CardImg*/}
+          {/*src={*/}
+          {/*props.photo ||*/}
+          {/*"https://images.unsplash.com/photo-1527605555-b01c458b8029?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"*/}
+          {/*}*/}
+          {/*alt="Card image cap"*/}
+          {/*/>*/}
+          {/*<div>*/}
+          {/*<StyledH5 is_seeker={props.is_seeker}>{props.name}</StyledH5>*/}
+          {/*<span>{props.summary}</span>*/}
+          {/*</div>*/}
+          <div className="author">
+            <div className="block block-one" />
+            <div className="block block-two" />
+            <div className="block block-three" />
+            <div className="block block-four" />
+            <a href="#pablo" onClick={e => e.preventDefault()}>
+              <img
+                alt="..."
+                className="avatar"
+                src={props.photo || require("assets/img/anime3.png")}
+              />
+              <StyledCompanyName className="title">
+                {props.name}
+              </StyledCompanyName>
+              <StyledH5 is_seeker={props.is_seeker}>{props.summary}</StyledH5>
+            </a>
           </div>
         </CardHeader>
         {/************************** CardHeader ends *******************************/}
 
         {/************************** StyledCardBody starts *******************************/}
-        <StyledCardBody className="card-body" is_open={props.is_open}>
+        <StyledCardBody
+          className="card-body"
+          is_open={props.is_open}
+          height={props.height}
+        >
           <div className="front">
             <StyledCardTitle className="icard-title">
               {props.title}
             </StyledCardTitle>
-            {props.skills &&
-              props.skills.map((skill, i) => (
-                <span key={i * Date.now()}>{skill} </span>
-              ))}
-            {props.extra_skills &&
-              props.extra_skills.map((skill, i) => (
-                <span key={Math.random() * i * Date.now()}>{skill}</span>
-              ))}
+            <StyledSkilledDiv>
+              {props.skills && (
+                <li>
+                  {" "}
+                  {props.skills.map((skill, i) => (
+                    <span key={i * Date.now()}>{skill} </span>
+                  ))}
+                </li>
+              )}
+              {props.extra_skills && (
+                <li>
+                  {" "}
+                  {props.extra_skills.map((skill, i) => (
+                    <span key={Math.random() * i * Date.now()}>{skill} </span>
+                  ))}
+                </li>
+              )}
+              {props.familiar_with && (
+                <li>
+                  {" "}
+                  {props.familiar_with.map((skill, i) => (
+                    <span key={Math.random() * i * Date.now()}>{skill} </span>
+                  ))}
+                </li>
+              )}
+            </StyledSkilledDiv>
             {/*ShowFullCard
             Usage: this styled component is useful if you have data that needs to display conditionally.
             props:
@@ -359,12 +368,43 @@ class ExplicitBaseCard extends React.Component {
           </div>
           <div className="back">
             <ShowFullCard is_open={true} className="showfullcard">
-              <CardText>experience: {props.experience}</CardText>
-              <CardText>salary_min: {props.salary_min}</CardText>
-              <CardText>salary_max: {props.salary_max}</CardText>
-              <CardText>education: {props.education}</CardText>
-              <CardText>description: {props.description}</CardText>
-              <CardText>requirements: {props.requirements}</CardText>
+              {props.experience && (
+                <CardBody>
+                  {" "}
+                  <CardTitle>Experience: </CardTitle>{" "}
+                  <CardText> {props.experience}</CardText>
+                </CardBody>
+              )}
+              {props.education && (
+                <CardBody>
+                  <CardTitle> Education: </CardTitle>{" "}
+                  <CardText> {props.education}</CardText>{" "}
+                </CardBody>
+              )}
+              {props.salary_min && (
+                <CardBody>
+                  <CardTitle>Salary-min: </CardTitle>
+                  <CardText>{props.salary_min}</CardText>
+                </CardBody>
+              )}
+              {props.salary_max && (
+                <CardBody>
+                  <CardTitle>Salary-max: </CardTitle>{" "}
+                  <CardText> {props.salary_max}</CardText>
+                </CardBody>
+              )}
+              {props.description && (
+                <CardBody>
+                  <CardTitle>Description: </CardTitle>{" "}
+                  <CardText>{props.description}</CardText>
+                </CardBody>
+              )}
+              {props.requirements && (
+                <CardBody>
+                  <CardTitle> Requirements: </CardTitle>{" "}
+                  <CardText>{props.requirements}</CardText>
+                </CardBody>
+              )}
             </ShowFullCard>
           </div>
         </StyledCardBody>
@@ -418,6 +458,7 @@ class ExplicitBaseCard extends React.Component {
                 color={props.btn1color}
                 className={props.btn1ClassName}
                 size={props.btnSizeForAll}
+                name={props.btn1Name}
               >
                 {props.btn1Text}
                 <i className={props.btn1Icon} />
@@ -443,6 +484,8 @@ class ExplicitBaseCard extends React.Component {
                   disabled={!props.is_validbtn2}
                   color={props.btn2color}
                   size={props.btnSizeForAll}
+                  className={props.btn2ClassName}
+                  btn2Icon={props.btn2Icon}
                 />
               ) : (
                 <StyledButton
@@ -452,6 +495,7 @@ class ExplicitBaseCard extends React.Component {
                   color={props.btn2color}
                   className={props.btn2ClassName}
                   size={props.btnSizeForAll}
+                  name={props.btn2Name}
                 >
                   {props.btn2Text}
                   <i className={props.btn2Icon} />
@@ -476,7 +520,11 @@ class ExplicitBaseCard extends React.Component {
                   buttonLabel={props.btn3Text}
                   confirmAction={props.btn3}
                   disabled={!props.is_validbtn3}
-                  id="toggler"
+                  id="button3"
+                  color={props.btn3color}
+                  size={props.btnSizeForAll}
+                  className={props.btn3ClassName}
+                  btn2Icon={props.btn3Icon}
                 />
               ) : (
                 <StyledButton
@@ -486,7 +534,7 @@ class ExplicitBaseCard extends React.Component {
                   color={props.btn3color}
                   className={props.btn3ClassName}
                   size={props.btnSizeForAll}
-                  id="toggler"
+                  id="button3"
                 >
                   {props.btn3Text}
                   <i className={props.btn3Icon} />
@@ -503,8 +551,16 @@ class ExplicitBaseCard extends React.Component {
             */}
 
             {props.btn4 && (
-              <StyledButton onClick={() => props.btn4(props.id)}>
+              <StyledButton
+                onClick={() => props.btn4(props.id)}
+                btn3={"true"}
+                color={props.btn4color}
+                className={props.btn4ClassName}
+                size={props.btnSizeForAll}
+                id="button4"
+              >
                 {props.btn4Text}
+                <i className={props.btn4Icon} />
               </StyledButton>
             )}
           </div>
@@ -518,7 +574,7 @@ class ExplicitBaseCard extends React.Component {
 
         */}
         {props.btn3Hover && (
-          <UncontrolledTooltip placement="right" target="toggler">
+          <UncontrolledTooltip placement="right" target="button3">
             {props.btn3Hover}
           </UncontrolledTooltip>
         )}

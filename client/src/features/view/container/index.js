@@ -7,6 +7,7 @@ import ExplicitBaseCard from "../../../presentation/BLKTestCard";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 import TransitionGroup from "react-transition-group/TransitionGroup";
+import CSSLoader from "../../../presentation/CSSLoader/CSSLoader";
 
 const MatchContainer = styled.div`
   width: 400px;
@@ -14,7 +15,11 @@ const MatchContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 20px auto;
+  margin: 0px auto;
+  @media (max-width: 450px) {
+    margin: 0px auto;
+    width: 91%;
+  }
 `;
 class ViewContainer extends Component {
   state = {
@@ -97,7 +102,8 @@ class ViewContainer extends Component {
     this.validate();
   };
   animationOnComplete = () => {
-    this.setState({ jobIdSelected: null, show_card: true });
+    // this.setState({ jobIdSelected: null, show_card: true });
+    this.setState({ show_card: true });
   };
 
   postMatchActionHandler = () => {
@@ -112,10 +118,18 @@ class ViewContainer extends Component {
     }
     if (userType) {
       data = this.populateSeekerDataInfo("SUPER");
-      toast.success("This job was Supered!!");
+      toast.success(
+        `We just let ${
+          this.props.data.employer.company_name
+        } know that you are really interested, check your matches to reach out!`
+      );
     } else {
       data = this.populateEmployerDataInfo("SUPER");
-      toast.success(`You Supered ${this.props.data.first_name}`);
+      toast.success(
+        `${
+          this.props.data.first_name
+        } now knows that you're really interested, check your matches to reach out!`
+      );
     }
     this.postCallAction(data);
     this.getRandomUserHandler();
@@ -126,10 +140,19 @@ class ViewContainer extends Component {
     let data;
     if (userType) {
       data = this.populateSeekerDataInfo("APPLY");
-      toast.success("Your application has been sent!");
+      toast.success(
+        `Got it. Check your matches to see if ${
+          this.props.data.employer.company_name
+        } is also interested`
+      );
     } else {
       data = this.populateEmployerDataInfo("CALL");
-      toast.success(`Your call to ${this.props.data.first_name} has been sent`);
+      // toast.success(`Your call to ${this.props.data.first_name} has been sent`);
+      toast.success(
+        `Got it. Check your matches to see if ${
+          this.props.data.first_name
+        } is also interested`
+      );
     }
     this.postCallAction(data);
     this.getRandomUserHandler();
@@ -139,7 +162,7 @@ class ViewContainer extends Component {
     this.validate();
     this.props.postSuperAction(data);
     this.getRandomUserHandler();
-    this.setState({ jobIdSelected: null });
+    // this.setState({ jobIdSelected: null });
   };
 
   populateSeekerDataInfo = action => {
@@ -166,14 +189,14 @@ class ViewContainer extends Component {
   };
   render() {
     if (!this.props.success) {
-      return <h1>waiting</h1>;
+      return <CSSLoader />;
     }
-    let card = <h1>waiting2</h1>;
+    let card = <CSSLoader />;
     let dropDownToggleText;
     if (this.props.currentUser.is_seeker) {
       card = (
         <ExplicitBaseCard
-          // confirmAction={this.state.confirmAction} //seems to need to be passed before button is rendered
+          confirmAction={this.state.confirmAction} //seems to need to be passed before button is rendered
           // btn1Text={"Skip"}
           btn1color={"info"}
           btn1ClassName={"btn-simple btn-icon"}
@@ -191,7 +214,8 @@ class ViewContainer extends Component {
           btn3={this.postInterest}
           name={this.props.data.company_name}
           title={this.props.data.title}
-          summary={this.props.data.id} // change id to summary
+          summary={this.props.data.summary}
+          photo={this.props.data.photo}
           is_seeker={this.props.data.is_seeker}
           fullCardArrow={this.showFullCard}
           is_open={this.state.is_open}
@@ -200,6 +224,7 @@ class ViewContainer extends Component {
           description={this.props.data.description}
           skills={this.props.data.top_skills}
           extra_skills={this.props.data.extra_skills}
+          familiar_with={this.props.data.familiar_with}
           is_validbtn2={this.state.hasEnoughCreditForSuperAction}
           is_validbtn3={this.state.hasEnoughCreditForRegularAction}
           btn3Hover={this.state.hoverText}
@@ -207,6 +232,7 @@ class ViewContainer extends Component {
           is_valid={this.state.hasEnoughCreditForRegularAction}
           btnSizeForAll={"ml"}
           animationOnComplete={this.animationOnComplete}
+          photo={this.props.data.photo}
         />
       );
     } else {
@@ -217,7 +243,7 @@ class ViewContainer extends Component {
       }
       card = (
         <ExplicitBaseCard
-          // confirmAction={this.state.confirmAction} //seems to need to be passed before button is rendered
+          confirmAction={this.state.confirmAction} //seems to need to be passed before button is rendered
           btnSizeForAll={"ml"}
           btn1color={"info"}
           btn1ClassName={"btn-simple btn-icon"}
@@ -234,6 +260,7 @@ class ViewContainer extends Component {
           btn2={this.postMatchActionHandler}
           btn3={this.postInterest}
           name={`${this.props.data.first_name} ${this.props.data.last_name}`}
+          photo={this.props.data.photo}
           dropDown={this.props.jobs}
           dropDownToggleText={
             dropDownToggleText || "Select Job to Create a Match"
@@ -258,15 +285,19 @@ class ViewContainer extends Component {
           experience={this.props.data.experience || "experience"}
           skills={this.props.data.top_skills}
           extra_skills={this.props.data.extra_skills}
+          familiar_with={this.props.data.other_skills}
           btn3Hover={this.state.hoverText}
           animationOnComplete={this.animationOnComplete}
+          photo={this.props.data.photo}
         />
       );
     }
 
     return (
       <MatchContainer>
-        <TransitionGroup>{this.state.show_card ? card : null} </TransitionGroup>
+        <TransitionGroup component={MatchContainer}>
+          {this.state.show_card ? card : null}
+        </TransitionGroup>
       </MatchContainer>
     );
   }
